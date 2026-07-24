@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">TerraCerta</string>
+    <string name="title_activity_main">TerraCerta</string>
+    <string name="package_name">pt.terracerta.app</string>
+    <string name="custom_url_scheme">pt.terracerta.app</string>
+</resources>

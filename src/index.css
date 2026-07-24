@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  background-color: #f6f7f3;
+  color: #22361d;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #bcd4b6; border-radius: 999px; border: 2px solid transparent; background-clip: content-box; }
+::-webkit-scrollbar-thumb:hover { background: #94b88c; background-clip: content-box; }
+
+@layer components {
+  .glass {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .card-surface {
+    background: #ffffff;
+    border: 1px solid #eef2ea;
+    border-radius: 1.25rem;
+    box-shadow: 0 1px 3px rgba(40,65,34,0.04), 0 8px 24px -10px rgba(40,65,34,0.08);
+  }
+  .input-base {
+    width: 100%;
+    border: 1px solid #dde2d6;
+    background: #ffffff;
+    border-radius: 0.75rem;
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9rem;
+    color: #22361d;
+    transition: border-color .15s, box-shadow .15s;
+    outline: none;
+  }
+  .input-base:focus {
+    border-color: #6c9a62;
+    box-shadow: 0 0 0 3px rgba(108,154,98,0.18);
+  }
+  .input-base::placeholder { color: #9aa89a; }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  .text-balance { text-wrap: balance; }
+}

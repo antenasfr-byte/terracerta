@@ -1,0 +1,28 @@
+{
+  "appId": "pt.terracerta.app",
+  "appName": "TerraCerta",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "Geolocation": {
+      "permissions": ["location"]
+    },
+    "Camera": {
+      "permissions": ["camera", "photos"]
+    },
+    "LocalNotifications": {
+      "smallIcon": "ic_stat_leaf",
+      "iconColor": "#2d6a4f",
+      "sound": "bell.wav"
+    }
+  },
+  "ios": {
+    "contentInset": "always"
+  },
+  "android": {
+    "allowMixedContent": false,
+    "backgroundColor": "#f6f7f3"
+  }
+}
