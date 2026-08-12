@@ -35,6 +35,16 @@ jobs:
       - name: Install npm dependencies
         run: npm ci
 
+      - name: Verify Supabase configuration
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        shell: bash
+        run: |
+          test -n "$VITE_SUPABASE_URL" || (echo "VITE_SUPABASE_URL em falta" && exit 1)
+          test -n "$VITE_SUPABASE_ANON_KEY" || (echo "VITE_SUPABASE_ANON_KEY em falta" && exit 1)
+          echo "Supabase configurado corretamente"
+
       - name: Build web assets
         env:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
@@ -43,6 +53,14 @@ jobs:
 
       - name: Sync Capacitor Android project
         run: npx cap sync android
+
+      - name: Set Android version
+        shell: bash
+        run: |
+          sed -i "s/versionCode [0-9]*/versionCode ${{ github.event.inputs.versionCode }}/" android/app/build.gradle
+          sed -i "s/versionName \".*\"/versionName \"${{ github.event.inputs.versionName }}\"/" android/app/build.gradle
+          echo "Versão definida:"
+          grep -E "versionCode|versionName" android/app/build.gradle
 
       - name: Configure release signing
         shell: bash
@@ -56,12 +74,6 @@ jobs:
           keyPassword=${{ secrets.RELEASE_KEY_PASSWORD }}
           EOF
 
-      - name: Set version
-        shell: bash
-        run: |
-          sed -i "s/versionCode [0-9]*/versionCode ${{ github.event.inputs.versionCode }}/" android/app/build.gradle
-          sed -i "s/versionName \".*\"/versionName \"${{ github.event.inputs.versionName }}\"/" android/app/build.gradle
-
       - name: Grant execute permission for gradlew
         working-directory: android
         run: chmod +x gradlew
@@ -73,7 +85,7 @@ jobs:
       - name: Upload release AAB artifact
         uses: actions/upload-artifact@v4
         with:
-          name: terracerta-release-aab
+          name: terracerta-release-aab-v${{ github.event.inputs.versionCode }}
           path: android/app/build/outputs/bundle/release/app-release.aab
           retention-days: 30
           if-no-files-found: error
