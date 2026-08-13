@@ -17,6 +17,7 @@
     "@capacitor/geolocation": "^8.2.0",
     "@capacitor/local-notifications": "^8.2.1",
     "@capacitor/preferences": "^8.0.1",
+    "@capgo/native-purchases": "^8.0.0",
     "@supabase/supabase-js": "^2.57.4",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
